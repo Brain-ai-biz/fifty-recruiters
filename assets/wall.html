@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>50 מגייסים קראו את קורות החיים</title>
+<style>
+/*__FONTS__*/
+:root{--ink:#0b1424;--mute:#55607a;--line:#e3e8f2;--bg:#f4f6fb;--t:#77CEBF;--b:#7C9CF0;--grad:linear-gradient(120deg,#77CEBF,#7C9CF0);--no:#c9cfdb}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Rubik,"Segoe UI",Arial,sans-serif}
+body{background:radial-gradient(1200px 600px at 80% -10%,#e6f6f3 0,transparent 60%),radial-gradient(1000px 600px at 0% 0%,#e9eefc 0,transparent 55%),var(--bg)}
+a{color:#2f5fd0}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 22px 60px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-size:14px;color:var(--mute)}
+.chip b{color:var(--ink)}
+h1{font-size:clamp(28px,4.4vw,52px);line-height:1.08;margin:18px 0 6px;font-weight:800;letter-spacing:-.5px}
+h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{font-size:18px;color:var(--mute);margin:0 0 18px}
+.stage{background:#fff;border:1px solid var(--line);border-radius:28px;padding:22px;box-shadow:0 20px 60px rgba(30,50,90,.08);position:relative;overflow:hidden}
+.score{display:flex;align-items:flex-end;justify-content:center;gap:clamp(14px,3vw,40px);margin:4px 0 16px;flex-wrap:wrap}
+.num{text-align:center}
+.num .v{font-size:clamp(54px,8vw,104px);font-weight:900;line-height:.95;font-variant-numeric:tabular-nums}
+.num .l{font-size:15px;color:var(--mute);margin-top:4px}
+.num.after .v{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.arrow{font-size:clamp(30px,4vw,52px);color:#b8c1d4;padding-bottom:28px}
+.wall{display:grid;grid-template-columns:repeat(10,1fr);gap:clamp(5px,1vw,12px);position:relative}
+.tile{all:unset;cursor:pointer;position:relative;aspect-ratio:1;border-radius:18%;background:#eef2f9;transition:transform .45s cubic-bezier(.2,.9,.3,1.3),opacity .45s,filter .45s,box-shadow .45s,background .45s}
+.tile svg{width:100%;height:100%;display:block;border-radius:18%}
+.tile:focus-visible{outline:3px solid #2f5fd0;outline-offset:3px}
+.tile.idle{opacity:.92}
+.tile.no{filter:grayscale(1) contrast(.9);opacity:.3;transform:scale(.9)}
+.tile.yes{background:#fff;box-shadow:0 0 0 3px var(--t),0 0 22px 2px rgba(124,156,240,.55);transform:scale(1.03)}
+.tile.flip{animation:pop .7s cubic-bezier(.2,.9,.3,1.4)}
+@keyframes pop{0%{transform:scale(.9)}45%{transform:scale(1.16)}100%{transform:scale(1.03)}}
+.ph{position:absolute;inset-inline-start:-6%;bottom:-6%;width:34%;aspect-ratio:1;border-radius:50%;background:var(--grad);display:grid;place-items:center;opacity:0;transform:scale(.4);transition:.35s;box-shadow:0 3px 10px rgba(47,95,208,.35)}
+.ph svg{width:58%;height:58%}
+.tile.yes .ph{opacity:1;transform:scale(1)}
+.tile.yes.flip .ph{animation:ring .9s ease .15s}
+@keyframes ring{0%,100%{rotate:0deg}20%{rotate:-16deg}40%{rotate:14deg}60%{rotate:-10deg}80%{rotate:6deg}}
+.sweep{position:absolute;inset:0;pointer-events:none;background:linear-gradient(270deg,transparent,rgba(119,206,191,.0) 30%,rgba(119,206,191,.55) 48%,rgba(124,156,240,.55) 52%,transparent 70%);background-size:300% 100%;background-position:100% 0;opacity:0}
+.sweep.go{animation:sweep 1.5s ease-in-out}
+@keyframes sweep{0%{opacity:1;background-position:0% 0}100%{opacity:1;background-position:100% 0}}
+.phase{text-align:center;margin:14px 0 0;font-size:16px;color:var(--mute);min-height:24px}
+.ctrl{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.btn{font:600 16px Rubik,Arial,sans-serif;border:1px solid var(--line);background:#fff;color:var(--ink);padding:11px 18px;border-radius:14px;cursor:pointer;min-height:44px}
+.btn:hover{border-color:#b9c6e6}
+.btn.pri{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn.grad{background:var(--grad);color:#0b1424;border:0;font-weight:800}
+.btn[aria-pressed=true]{box-shadow:inset 0 0 0 2px #2f5fd0}
+.grid2{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;margin-top:22px}
+.card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:22px}
+.card h2{margin:0 0 4px;font-size:24px}
+.card .hint{color:var(--mute);margin:0 0 14px;font-size:15px}
+.cv{border:1px solid var(--line);border-radius:14px;padding:20px 22px;background:#fcfdff;font-size:14.5px;line-height:1.55}
+.cv h3{font-size:26px;margin:0}
+.cv .hl{color:#2f5fd0;font-weight:700;margin:2px 0}
+.cv .ct{color:var(--mute);font-size:13px;margin-bottom:8px}
+.cv h4{margin:14px 0 4px;font-size:15px;border-bottom:2px solid var(--t);padding-bottom:2px}
+.cv .jt{display:flex;justify-content:space-between;gap:10px;font-weight:600}
+.cv .jt span{font-weight:400;color:var(--mute);white-space:nowrap}
+.cv ul{margin:3px 0 8px;padding-inline-start:18px}
+.cv mark{background:linear-gradient(transparent 55%,rgba(119,206,191,.55) 55%);color:inherit}
+.dl{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.ch{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.ch li{border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.ch .bf{color:#8a93a8;text-decoration:line-through;text-decoration-color:#e76f6f;font-size:14px}
+.ch .af{font-weight:600;margin-top:4px}
+.ch .why{color:var(--mute);font-size:13.5px;margin-top:4px}
+.gaps{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
+.gaps span{border:1px solid var(--line);border-radius:99px;padding:5px 12px;font-size:14px;background:#f8fafd}
+details{margin-top:22px}
+summary{cursor:pointer;font-weight:700;font-size:18px;padding:10px 0}
+.all{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.row{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:14px;padding:10px;background:#fff}
+.row .mini{width:46px;flex:0 0 46px;border-radius:12px;overflow:hidden;background:#eef2f9}
+.row .mini svg{width:100%;display:block}
+.row b{font-size:15px}
+.row .o{color:var(--mute);font-size:13px}
+.row p{margin:4px 0 0;font-size:14px}
+.tag{display:inline-block;font-size:12px;border-radius:99px;padding:1px 8px;margin-inline-start:6px;vertical-align:1px}
+.tag.y{background:#e3f6f2;color:#11695c}.tag.n{background:#eef0f5;color:#5a6378}
+dialog{border:0;border-radius:24px;padding:0;max-width:440px;width:calc(100% - 32px);box-shadow:0 30px 80px rgba(10,20,40,.3)}
+dialog::backdrop{background:rgba(11,20,36,.45)}
+.dlg{padding:22px}
+.dlg .hd{display:flex;gap:14px;align-items:center}
+.dlg .hd .mini{width:84px;flex:0 0 84px;border-radius:20px;overflow:hidden;background:#eef2f9}
+.dlg .hd svg{width:100%;display:block}
+.dlg h3{margin:0;font-size:22px}
+.dlg .o{color:var(--mute);font-size:14px}
+.dlg .q{border-radius:14px;padding:12px 14px;margin-top:12px;font-size:15.5px;line-height:1.5}
+.dlg .q small{display:block;color:var(--mute);font-size:12.5px;margin-bottom:3px}
+.dlg .q1{background:#f3f4f8}.dlg .q2{background:#e9f7f4}
+.foot{margin-top:26px;color:var(--mute);font-size:14px;line-height:1.6;border-top:1px solid var(--line);padding-top:16px}
+.warn{background:#fff8e6;border:1px solid #f3dfa6;color:#6b5512;border-radius:14px;padding:10px 14px;font-size:14.5px;margin:0 0 16px}
+body.poster .hide-p,body.poster .ctrl .btn:not(.ex),body.poster .phase{display:none!important}
+body.poster .wrap{max-width:none;padding:2vh 3vw;height:100vh;display:flex;flex-direction:column;align-items:center}
+body.poster h1{text-align:center;font-size:clamp(26px,5vh,56px);margin:1vh 0}
+body.poster .sub{text-align:center;font-size:clamp(13px,2vh,18px);margin:0 0 1.5vh}
+body.poster .stage{padding:2vh 2vw;width:auto}
+body.poster .score{margin:0 0 1.5vh}
+body.poster .num .v{font-size:clamp(40px,11vh,110px)}
+body.poster .wall{width:min(92vw,calc((100vh - 46vh) * 2));margin:0 auto}
+body.poster .ctrl{position:fixed;top:10px;inset-inline-start:10px;margin:0}
+.ex{display:none}
+body.poster .ex{display:inline-flex;opacity:.75}
+@media (max-width:620px){body.poster .wall{grid-template-columns:repeat(10,1fr);gap:4px;width:94vw}body.poster .tile.yes{box-shadow:0 0 0 2px var(--t),0 0 10px rgba(124,156,240,.5)}body.poster .ph{display:none}body.poster .ctrl{top:auto;bottom:12px;inset-inline-start:50%;transform:translateX(50%)}body.poster .wrap{justify-content:center}}
+@media (max-width:860px){.grid2{grid-template-columns:1fr}.all{grid-template-columns:1fr}}
+@media (max-width:620px){.wall{grid-template-columns:repeat(5,1fr)}.tile.yes{transform:none}.stage{padding:14px;border-radius:22px}.wrap{padding:18px 14px 50px}.sub{font-size:16px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.ctrl,.dl,details,.top{display:none}}
+</style>
+</head>
+<body>
+<main class="wrap" id="app">
+  <div class="top hide-p">
+    <span class="chip">🎯 <b id="target"></b></span>
+    <span class="chip">סימולציה · <span id="date"></span></span>
+  </div>
+  <h1><span class="g">50 מגייסים</span> קראו את קורות החיים</h1>
+  <p class="sub" id="sub"></p>
+  <div class="warn hide-p" id="noad" hidden>לא צורפה מודעת דרושים, אז המגייסים קראו מול משרה טיפוסית לתפקיד הזה. עם מודעה אמיתית התוצאה מדויקת יותר.</div>
+  <section class="stage" aria-label="קיר המגייסים">
+    <div class="score">
+      <div class="num"><div class="v" id="n1">0</div><div class="l">היו מתקשרים לפני</div></div>
+      <div class="arrow" aria-hidden="true">←</div>
+      <div class="num after"><div class="v" id="n2">?</div><div class="l">אחרי השכתוב</div></div>
+    </div>
+    <div class="wall" id="wall"></div>
+    <div class="sweep" id="sweep"></div>
+    <p class="phase" id="phase" aria-live="polite"></p>
+    <div class="ctrl">
+      <button class="btn" id="bBefore" aria-pressed="false">לפני</button>
+      <button class="btn" id="bAfter" aria-pressed="false">אחרי</button>
+      <button class="btn" id="bReplay">▶ לצפות שוב</button>
+      <button class="btn hide-p" id="bPoster">📸 מסך לצילום</button>
+      <button class="btn ex" id="bExit">יציאה ממסך הצילום</button>
+    </div>
+  </section>
+
+  <div class="grid2 hide-p">
+    <section class="card">
+      <h2>קורות החיים החדשים</h2>
+      <p class="hint">אותו ניסיון ואותם הישגים, בסדר ובניסוח שמגייס קורא בשש שניות. שום דבר לא הומצא: כל שורה נשענת על משהו שכתוב במקור.</p>
+      <div class="cv" id="cv"></div>
+      <div class="dl">
+        <button class="btn grad" id="bDocx">⬇ הורדה לוורד</button>
+        <button class="btn pri" id="bPdf">שמירה כ-PDF</button>
+      </div>
+    </section>
+    <section class="card">
+      <h2>מה שינינו ולמה</h2>
+      <p class="hint">השינויים החשובים, מהמקור לגרסה החדשה.</p>
+      <ul class="ch" id="changes"></ul>
+      <div id="gapsBox">
+        <h2 style="margin-top:22px">מה שהשכתוב לא יכול לתקן</h2>
+        <p class="hint" id="gapsHint"></p>
+        <div class="gaps" id="gaps"></div>
+      </div>
+    </section>
+  </div>
+
+  <details class="hide-p">
+    <summary>כל 50 התשובות</summary>
+    <div class="all" id="all"></div>
+  </details>
+
+  <p class="foot" id="disc"></p>
+</main>
+
+<dialog id="dlg"><div class="dlg">
+  <div class="hd"><div class="mini" id="dFace"></div><div><h3 id="dName"></h3><div class="o" id="dRole"></div><div class="o" id="dScan"></div></div></div>
+  <div class="q q1"><small>לפני השכתוב</small><span id="dW1"></span></div>
+  <div class="q q2"><small>אחרי השכתוב</small><span id="dW2"></span></div>
+  <div class="ctrl"><button class="btn pri" id="dClose">סגירה</button></div>
+</div></dialog>
+
+<script id="faces">
+/* פנים מצוירות בקוד: אותו מגייס תמיד מקבל אותן פנים. בלי תמונות ובלי רשת. */
+const FACES = (() => {
+  const SKIN = ['#F7D9C4', '#EFC3A0', '#E2AA80', '#C98D62', '#A66C45', '#7B4D2F'];
+  const HAIR = ['#1F1A19', '#3A2A20', '#5C3A26', '#87573A', '#B4834F', '#D8B06C', '#8B8C93', '#9E3F2C'];
+  const SHIRT = ['#2F6FD6', '#3FA996', '#0B1424', '#E0704F', '#7C9CF0', '#E9AE3C', '#3A4A6B', '#8D67CF', '#D9506F', '#5E8F3E'];
+  const BG = ['#E6F4F1', '#E8EEFC', '#FCEFE6', '#F1ECFB', '#FDF5DC', '#E9F3E4', '#FCE8EE', '#E5F1FA'];
+  const FEM = ['long', 'bob', 'bun', 'pony', 'curlyL', 'long', 'bob', 'hijab'];
+  const MAS = ['short', 'side', 'curlyS', 'buzz', 'bald', 'short', 'side', 'curlyS'];
+  function rng(seed) { let s = (seed * 2654435761) % 4294967296; return () => { s = (s * 1664525 + 1013904223) % 4294967296; return s / 4294967296; }; }
+  function look(p) {
+    const r = rng(p.id * 31 + 7), pick = a => a[Math.floor(r() * a.length)];
+    const f = p.g === 'f';
+    const L = { skin: pick(SKIN), hair: pick(HAIR), shirt: pick(SHIRT), bg: BG[p.id % BG.length], style: f ? pick(FEM) : pick(MAS) };
+    L.glasses = r() < .3; L.beard = !f && r() < .38; L.earring = f && r() < .45; L.blush = r() < .5;
+    if (L.style === 'bald' || L.style === 'buzz') L.hair = pick(HAIR.slice(0, 4).concat(['#8B8C93']));
+    if (L.style === 'hijab') L.scarf = pick(['#2F6FD6', '#3FA996', '#8D67CF', '#E0704F', '#3A4A6B']);
+    if (L.shirt === L.scarf) L.shirt = '#E9AE3C';
+    L.scarf = L.scarf || '#3FA996';
+    return L;
+  }
+  const shade = (hex, k) => { const n = parseInt(hex.slice(1), 16); const c = [n >> 16, (n >> 8) & 255, n & 255].map(v => Math.max(0, Math.min(255, Math.round(v * k)))); return '#' + c.map(v => v.toString(16).padStart(2, '0')).join(''); };
+  function svg(p, mood) {
+    const L = look(p), H = L.hair, S = L.skin, sd = shade(S, .86), out = [];
+    out.push(`<rect width="120" height="120" fill="${L.bg}"/>`);
+    // שיער אחורי
+    if (L.style === 'long') out.push(`<path d="M34 50 C30 22 90 22 86 50 L90 98 C76 104 44 104 30 98 Z" fill="${H}"/>`);
+    if (L.style === 'curlyL') out.push(`<g fill="${H}">${[[34, 44], [32, 60], [34, 76], [38, 90], [86, 44], [88, 60], [86, 76], [82, 90], [44, 30], [60, 25], [76, 30]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="13"/>`).join('')}</g>`);
+    if (L.style === 'pony') out.push(`<path d="M80 40 C98 46 100 74 90 88 C88 72 84 60 76 52 Z" fill="${H}"/>`);
+    if (L.style === 'hijab') out.push(`<path d="M30 56 C28 22 92 22 90 56 L94 104 C80 112 40 112 26 104 Z" fill="${L.scarf}"/>`);
+    // כתפיים
+    out.push(`<path d="M12 122 C14 96 34 86 60 86 C86 86 106 96 108 122 Z" fill="${L.shirt}"/>`);
+    out.push(`<path d="M48 87 L60 100 L72 87 Z" fill="${shade(L.shirt, 1.25)}" opacity=".9"/>`);
+    out.push(`<rect x="51" y="68" width="18" height="22" rx="8" fill="${sd}"/>`);
+    // אוזניים וראש
+    if (L.style !== 'hijab') out.push(`<circle cx="38.5" cy="55" r="5" fill="${sd}"/><circle cx="81.5" cy="55" r="5" fill="${sd}"/>`);
+    out.push(`<ellipse cx="60" cy="52" rx="21.5" ry="25" fill="${S}"/>`);
+    // שיער קדמי
+    const front = {
+      short: `<path d="M38.5 50 C36 24 84 24 81.5 50 C79 40 72 34 60 34 C49 34 41 40 38.5 50 Z" fill="${H}"/>`,
+      side: `<path d="M38.5 52 C34 22 86 22 81.5 48 C74 36 62 34 50 40 C45 42 41 46 38.5 52 Z" fill="${H}"/>`,
+      curlyS: `<g fill="${H}">${[[42, 38], [50, 31], [60, 29], [70, 31], [78, 38], [40, 46], [80, 46]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="8"/>`).join('')}</g>`,
+      buzz: `<path d="M39 46 C40 28 80 28 81 46 C76 36 70 33 60 33 C50 33 44 36 39 46 Z" fill="${H}" opacity=".85"/>`,
+      bald: `<path d="M38.6 54 C38 46 40 42 42 40 L42 56 Z M81.4 54 C82 46 80 42 78 40 L78 56 Z" fill="${H}" opacity=".8"/>`,
+      long: `<path d="M38 56 C34 24 86 24 82 56 C80 44 74 36 64 33 C58 40 48 44 38 56 Z" fill="${H}"/>`,
+      bob: `<path d="M36 72 C28 22 92 22 84 72 L78 72 C80 52 76 40 66 36 C58 42 48 44 42 50 L42 72 Z" fill="${H}"/>`,
+      bun: `<circle cx="60" cy="22" r="11" fill="${H}"/><path d="M38.5 52 C36 26 84 26 81.5 52 C79 40 72 34 60 34 C49 34 41 40 38.5 52 Z" fill="${H}"/>`,
+      pony: `<path d="M38.5 52 C36 26 84 26 81.5 52 C79 40 72 34 60 34 C49 34 41 40 38.5 52 Z" fill="${H}"/>`,
+      curlyL: `<g fill="${H}">${[[44, 36], [52, 30], [62, 29], [72, 32], [79, 39]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="9"/>`).join('')}</g>`,
+      hijab: `<path d="M38 60 C34 28 86 28 82 60 C84 34 36 34 38 60 Z" fill="${shade(L.scarf, .85)}"/>`
+    };
+    out.push(front[L.style] || '');
+    if (L.beard) out.push(`<path d="M39 56 C40 76 50 82 60 82 C70 82 80 76 81 56 C78 66 72 70 60 70 C48 70 42 66 39 56 Z" fill="${H}" opacity=".92"/>`);
+    // פנים
+    if (L.blush) out.push(`<circle cx="47" cy="62" r="4" fill="#E9837A" opacity=".22"/><circle cx="73" cy="62" r="4" fill="#E9837A" opacity=".22"/>`);
+    out.push(`<path d="M46 46.5 Q51 44 55.5 46" stroke="${shade(H, .9)}" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M64.5 46 Q69 44 74 46.5" stroke="${shade(H, .9)}" stroke-width="2.4" fill="none" stroke-linecap="round"/>`);
+    out.push(`<circle cx="51" cy="54" r="2.7" fill="#1E2433"/><circle cx="69" cy="54" r="2.7" fill="#1E2433"/>`);
+    out.push(`<path d="M60 56 Q57.5 61.5 61 62.5" stroke="${shade(S, .7)}" stroke-width="1.8" fill="none" stroke-linecap="round"/>`);
+    const mouth = mood === 'yes' ? `<path d="M51 66 Q60 76 69 66 Z" fill="#7A2E2E"/><path d="M53.5 66.6 Q60 69.5 66.5 66.6 Z" fill="#fff"/>`
+      : mood === 'no' ? `<path d="M54 69 Q60 67.4 66 69" stroke="#6B3B33" stroke-width="2.2" fill="none" stroke-linecap="round"/>`
+      : `<path d="M54 67 Q60 70.5 66 67" stroke="#6B3B33" stroke-width="2.2" fill="none" stroke-linecap="round"/>`;
+    out.push(mouth);
+    if (L.glasses) out.push(`<g stroke="#1E2433" stroke-width="2" fill="rgba(255,255,255,.18)"><rect x="43" y="48" width="15" height="12" rx="5"/><rect x="62" y="48" width="15" height="12" rx="5"/><path d="M58 53 H62" fill="none"/></g>`);
+    if (L.earring) out.push(`<circle cx="38.5" cy="62" r="2.2" fill="#E9AE3C"/><circle cx="81.5" cy="62" r="2.2" fill="#E9AE3C"/>`);
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-hidden="true">${out.join('')}</svg>`;
+  }
+  const PHONE = `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#0b1424" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>`;
+  return { svg, look, PHONE };
+})();
+</script>
+<script>
+const D = /*__DATA__*/null;
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let timers = [];
+const later = (ms, fn) => timers.push(setTimeout(fn, ms));
+const clear = () => { timers.forEach(clearTimeout); timers = []; };
+
+function rngOrder(n, seed) { const a = [...Array(n).keys()]; let s = seed; for (let i = n - 1; i > 0; i--) { s = (s * 9301 + 49297) % 233280; const j = Math.floor(s / 233280 * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+function setTile(el, p, state, flip) {
+  const mood = state === 'yes' ? 'yes' : state === 'no' ? 'no' : 'idle';
+  if (el.dataset.mood !== mood) { el.querySelector('.f').innerHTML = FACES.svg(p, mood); el.dataset.mood = mood; }
+  el.classList.remove('idle', 'yes', 'no', 'flip');
+  el.classList.add(state);
+  if (flip) { void el.offsetWidth; el.classList.add('flip'); }
+}
+
+function build() {
+  $('target').textContent = D.target;
+  $('date').textContent = D.date;
+  $('sub').textContent = `גיוס בחברות גדולות, מייסדים, חברות השמה, מנהלים ועסקים קטנים. כל אחד החליט אם היה מתקשר, ואז שכתבנו וקראו שוב.`;
+  $('noad').hidden = D.fromAd;
+  $('disc').textContent = D.disclaimer;
+  const wall = $('wall');
+  D.people.forEach((p, i) => {
+    const b = document.createElement('button');
+    b.className = 'tile idle'; b.type = 'button';
+    b.setAttribute('aria-label', `${p.name}, ${p.role}, ${p.org}. לפני: ${p.c1 ? 'הייתה שיחה' : 'לא'}. אחרי: ${p.c2 ? 'הייתה שיחה' : 'לא'}`);
+    b.innerHTML = `<span class="f"></span><span class="ph">${FACES.PHONE}</span>`;
+    b.addEventListener('click', () => openP(p));
+    wall.appendChild(b); p.el = b; setTile(b, p, 'idle');
+  });
+  // קורות החיים החדשים
+  const cv = D.cv, c = cv.contact || {};
+  const hlNum = s => esc(s).replace(/\d[\d,.]*%?/g, m => /^(19|20)\d\d$/.test(m) ? m : `<mark>${m}</mark>`);
+  let h = `<h3>${esc(cv.name)}</h3>`;
+  if (cv.headline) h += `<div class="hl">${esc(cv.headline.text)}</div>`;
+  h += `<div class="ct">${[c.phone, c.email, c.city, c.link].filter(Boolean).map(x => `<bdi>${esc(x)}</bdi>`).join(' &nbsp;|&nbsp; ')}</div>`;
+  if (cv.summary) h += `<h4>תקציר</h4><div>${hlNum(cv.summary.text)}</div>`;
+  if (cv.experience?.length) { h += `<h4>ניסיון</h4>`; cv.experience.forEach(e => { h += `<div class="jt">${esc(e.title)}, ${esc(e.org)}<span>${esc(e.dates)}</span></div><ul>${(e.bullets || []).map(b => `<li>${hlNum(b.text)}</li>`).join('')}</ul>`; }); }
+  if (cv.skills?.items?.length) h += `<h4>כלים ומיומנויות</h4><div>${cv.skills.items.map(esc).join(' · ')}</div>`;
+  [['education', 'השכלה'], ['military', 'שירות'], ['languages', 'שפות'], ['extra', 'עוד']].forEach(([k, t]) => { if (cv[k]?.length) h += `<h4>${t}</h4>` + cv[k].map(b => `<div>${esc(b.text)}</div>`).join(''); });
+  $('cv').innerHTML = h;
+  $('changes').innerHTML = D.changes.map(x => `<li>${x.before ? `<div class="bf">${esc(x.before)}</div>` : ''}<div class="af">${x.after ? esc(x.after) : 'נמחק'}</div>${x.why ? `<div class="why">${esc(x.why)}</div>` : ''}</li>`).join('');
+  const stayed = D.people.filter(p => !p.c2).length;
+  if (!stayed) $('gapsBox').hidden = true;
+  else {
+    $('gapsHint').textContent = `${stayed} מגייסים נשארו בלי שיחה. זו הסיבה העיקרית של כל אחד, ולידה כמה מגייסים אמרו אותה. עובדה שחסרה לא מוסיפים בניסוח; אם יש ניסיון כזה שלא נכתב, כדאי להוסיף אותו למקור ולהריץ שוב.`;
+    $('gaps').innerHTML = D.gaps.map(g => `<span>${esc(g.label)} · ${g.n}</span>`).join('');
+  }
+  $('all').innerHTML = D.people.map(p => `<div class="row"><div class="mini">${FACES.svg(p, p.c2 ? 'yes' : 'no')}</div><div><b>${esc(p.name)}</b><span class="tag ${p.c2 ? 'y' : 'n'}">${p.c2 ? 'הייתה שיחה' : 'בלי שיחה'}</span><div class="o">${esc(p.role)}, ${esc(p.org)}</div><p>לפני: ${esc(p.w1)}</p><p>אחרי: ${esc(p.w2)}</p></div></div>`).join('');
+}
+
+function openP(p) {
+  $('dFace').innerHTML = FACES.svg(p, p.c2 ? 'yes' : 'no');
+  $('dName').textContent = p.name;
+  $('dRole').textContent = `${p.role}, ${p.org}`;
+  $('dScan').textContent = `מה בודקים פה בשש שניות: ${p.scan}`;
+  $('dW1').textContent = p.w1; $('dW2').textContent = p.w2;
+  $('dlg').showModal();
+}
+
+function show(which) {
+  clear();
+  $('bBefore').setAttribute('aria-pressed', which === 1); $('bAfter').setAttribute('aria-pressed', which === 2);
+  D.people.forEach(p => setTile(p.el, p, (which === 1 ? p.c1 : p.c2) ? 'yes' : 'no'));
+  $('n1').textContent = D.n1; $('n2').textContent = which === 2 ? D.n2 : '?';
+  $('phase').textContent = which === 1 ? `לפני השכתוב: ${D.n1} מתוך 50 היו מתקשרים.` : `אחרי השכתוב: ${D.n2} מתוך 50 היו מתקשרים. לחיצה על פנים מראה מה כל אחד אמר.`;
+}
+
+function countTo(el, from, to, ms) {
+  const t0 = performance.now();
+  const step = now => { const u = Math.min(1, (now - t0) / ms); el.textContent = Math.round(from + (to - from) * (1 - Math.pow(1 - u, 3))); if (u < 1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+}
+
+function play() {
+  clear();
+  if (REDUCED) return show(2);
+  $('bBefore').setAttribute('aria-pressed', false); $('bAfter').setAttribute('aria-pressed', false);
+  D.people.forEach(p => setTile(p.el, p, 'idle'));
+  $('n1').textContent = '0'; $('n2').textContent = '?';
+  $('phase').textContent = '50 מגייסים קוראים...';
+  const order = rngOrder(50, 7);
+  let yes = 0;
+  order.forEach((i, k) => later(500 + k * 55, () => { const p = D.people[i]; setTile(p.el, p, p.c1 ? 'yes' : 'no', p.c1); if (p.c1) $('n1').textContent = ++yes; }));
+  const t1 = 500 + 50 * 55 + 500;
+  later(t1, () => { $('phase').textContent = `${D.n1} מתוך 50. משכתבים את קורות החיים...`; const s = $('sweep'); s.classList.remove('go'); void s.offsetWidth; s.classList.add('go'); });
+  const t2 = t1 + 1700;
+  // גל מימין לשמאל: עמודה אחרי עמודה
+  const cols = getComputedStyle($('wall')).gridTemplateColumns.split(' ').length;
+  D.people.forEach((p, i) => {
+    const col = i % cols;
+    later(t2 + col * 120 + Math.floor(i / cols) * 25, () => setTile(p.el, p, p.c2 ? 'yes' : 'no', p.c2 && !p.c1));
+  });
+  later(t2, () => { $('phase').textContent = 'קוראים שוב...'; countTo($('n2'), D.n1, D.n2, cols * 120 + 400); });
+  later(t2 + cols * 120 + 700, () => show(2));
+}
+
+$('bBefore').onclick = () => show(1);
+$('bAfter').onclick = () => show(2);
+$('bReplay').onclick = play;
+$('bPoster').onclick = () => { document.body.classList.add('poster'); show(2); scrollTo(0, 0); };
+$('bExit').onclick = () => document.body.classList.remove('poster');
+$('dClose').onclick = () => $('dlg').close();
+$('bDocx').onclick = () => {
+  const bin = atob(D.docx), u = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([u], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' }));
+  a.download = `${D.file}-קורות-חיים.docx`; document.body.appendChild(a); a.click(); a.remove();
+};
+$('bPdf').onclick = () => {
+  const w = window.open(URL.createObjectURL(new Blob([D.cvHtml], { type: 'text/html' })), '_blank');
+  if (!w) alert('הדפדפן חסם חלון חדש. אפשר לפתוח את הקובץ cv-new.html שבתיקייה ולשמור משם כ-PDF.');
+};
+addEventListener('keydown', e => { if (e.key === 'Escape') document.body.classList.remove('poster'); });
+
+if (!D) { document.getElementById('app').innerHTML = '<p>חסרים נתונים. הדף הזה נבנה בפקודה: python3 fr.py build</p>'; }
+else { build(); play(); }
+</script>
+</body>
+</html>
